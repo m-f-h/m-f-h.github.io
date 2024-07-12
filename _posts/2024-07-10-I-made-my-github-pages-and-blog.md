@@ -37,17 +37,19 @@ defaults:
 ```
 I think the  [/_config.yml](/_config.yml) file *could* define a default layout (TODO: check & link the docs), but doesn't, so far. (The only default it defines is the tag "Other" for "nodes" (what is the correct term? pages and posts...?) of type `post`)
 
+**Update:** had a look at Github Action Build Log and there was a warning, default for posts is no more `post` but now `posts`.
+
 #### page layout
 The page layouts are defined in [/_layouts](/_layouts), but for the moment, `post.html` is  the only entry there.
 
 These "layout" HTML files include some additional header stuff, but not the basic HTML header (`<head><title>...`) 
 
-Essentially it starts with a `<header>` section which has `<h1>{{ page.title ...` inside.
+Essentially it starts with a `<header>` section which has `<h1>{\{ page.title ...` inside.
 
 Then it has two `<div>` sections,
 * one with
-`{% include sharelinks.html %}` (these are the social media links defined in `/_config.yml` and shown in the footer, I think),
-* the other with `{{ content }} {% include navlinks.html %}` (the latter makes a navbar "[<- prev.post next post->]" below the contents.)
+`{\% include sharelinks.html %}` (these are the social media links defined in `/_config.yml` and shown in the footer, I think),
+* the other with `{\{ content }} {\% include navlinks.html %}` (the latter makes a navbar "[<- prev.post next post->]" below the contents.)
   
 * These two include files are specified in `/_includes`. 
 * *There* is another file `head.html` which contains the HTML `<HEAD>` (with several `<LINK>` sections etc., but nothing else.)
