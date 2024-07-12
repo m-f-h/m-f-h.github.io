@@ -1,5 +1,7 @@
-Here you can say lots of fun things about your site.
+Welcome to my personal github pages and blog.
 
-Maybe say a some things about yourself.
+This is under construction, thanks for coming back later.
 
-Or maybe what you plan to blog about.
+Maybe I'll say something about myself here, one day.
+
+Or maybe what I plan to blog about.
