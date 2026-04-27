@@ -32,12 +32,13 @@ write("/temp/b012345.txt",strjoin([Str(n" "A012345(n)) | n<-[o..N]], "\n")
 ```
 Of course, if we have the data in a list, we replace A012345(n) by A012345[n] or [n+1] if offset is zero.
 
-It is indeed very (very) much more efficient to concatenate the lines of the file and use only one single  
+It is indeed very **(very)** much more efficient to concatenate the lines of the file and use only one single  
 `write()` command, rather than `write()` each line separately.
 
-For the special case of recurrent sequences (such as Conway's "fraction game" sequences, *e.g.*, 
-[PRIMEGAME = A203907](http://oeis.org/A203907) with trajectories of 2 (A007542)](http://oeis.org/A007542) 
-[or 3 (A185242)](http://oeis.org/A185242)), we can create the sequence "on the run"
+For the special case of recurrent sequences (such as [Conway's "fraction game" sequences](../26/PRIMEGAME.html), *e.g.*, 
+[PRIMEGAME = A203907](http://oeis.org/A203907) with trajectories of 2 ([A007542](http://oeis.org/A007542))
+[or 3 (A185242)](http://oeis.org/A185242)), 
+we can create the sequence "on the run" with
 ```
-write("/temp/b007542.txt",strjoin([Str(k" ",a=if(k,A203907(a),2))|k<-[0..8102]], "\n"))
+write("/temp/b007542.txt",strjoin([Str(k" ", a=if(k,A203907(a),2)) | k<-[0..8102]], "\n"))
 ```
