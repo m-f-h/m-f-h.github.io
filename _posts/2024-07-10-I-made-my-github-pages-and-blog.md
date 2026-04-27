@@ -61,8 +61,8 @@ Then it has two `<div>` sections,
   * Obviously it does look for `.md` pages at the root.
   * Can we put static pages in the `/_posts` subdir?
   * Can we make arbitrary folders, and Jekyll will look everywhere? If we want to "hide" a file but not delete it, can/must we create a special folder and list it in `.gitignore`?
-  
-  
+
+
   [Is that a feature of `jekyll-sitemap` listed in `/_config.yml` ?])
 * the static homepage (`/index.md`) has no YAML header at all. Does it also use the  `post.html` layout ?
 * the "Blog archive" page (`/archive.md`) does have a YAML header that has `layout: default`. Does that mean that it should : 
@@ -71,7 +71,15 @@ Then it has two `<div>` sections,
   * use as layout the only one that is defined (or if it weren't the only one, then the alphabetically first one?)
   * the blog posts (`.md` files in `/_posts`) do use the `post.html` layout, even without a YML header. (How do they know?)
 
-Some open questions/TODOs:
+#### Mathjax (added 27.4.2026)
+
+To my surprise, MathJax wasn't "activated".
+I found the appropriate place to fix this was my existing `/_includes/head.html`,
+given that I don't have (yet) a `_layouts/default.html`.
+So I added a `<script>` section to define the text- & displaystyle delimiters, and 
+and a `<script async src=...>` to include some `mathjax.js` from some CloudFlare CDN.
+
+### Some open questions/TODOs:
 
 * I will have to create a second "layout" for static pages that are not part of the blog.
 * In order that both, these pages and the blog posts, keep a uniform appearance, I guess I'll put the common stuff in a new `_includes` file
