@@ -18,15 +18,14 @@ The successor map defines a recurrent sequence $N=(N_n)_ {n\in ℕ}$ for any sta
 
 ### PRIMEGAME
 
-The fractions, successor function and further references for PRIMEGAME are defined in [A203907](http://oeis.org/A203907).
+The fractions, successor function and further references for PRIMEGAME can be found in [oeis:A203907](http://oeis.org/A203907).
 
 The PRIMEGAME is such that $(N_n)$ with $N_0=2$ contains all $2^{p_n}$ in order, where $p_n$ is the $n$-th prime,
 and no other power of two except for $N_0=2$. 
 Otherwise said, it produces all primes in increasing order as $\log_2$ of the powers of 2 appearing in the sequence.
 
-The method is of course quite inefficient:\
-the first few primes appear as 
-$N_{19} = 4 = 2^2$, $N_{69} = 8 = 2^3$, $N_{281} = 32 = 2^5$, $N_{710} = 128 = 2^7$, $N_{2375} = 2^{11}$, ...\
+The method is of course quite inefficient: the first few primes appear as\
+&nbsp; &nbsp; $N_{19} = 4 = 2^2$, $N_{69} = 8 = 2^3$, $N_{281} = 32 = 2^5$, $N_{710} = 128 = 2^7$, $N_{2375} = 2^{11}$, ...\
 So it takes 2375 iterations of the PRIMEGAME successor function to "produce" the 5th prime $p_5=11$.
 
 R. K. Guy (1983) explaines very well how and why this "prime producing" PRIMEGAME works.
@@ -39,9 +38,9 @@ as Conway showed in [his FRACTRAN article from 1987](https://dx.doi.org/10.1007/
 Conway also gives the example PIGAME (with 40 fractions), which "produces" the decimal digits of &pi;, $d=(3,1,4,1,5,...)$, 
 here as $2^{d_n}$ being the first power of two in the sequence starting with $N_0=89\cdot2^n$.
 [This is incorrectly stated in Conway (1987), cf. [Kaushik *et al.*, arxiv:2412.16185](https://arxiv.org/abs/2412.16185).]
-However, it takes 774 iterations to get the initial digit as 2^3 in the trajectory of 89,\
-and I was not patient enough to find the second digit as 2^1 in the trajectory of 89&nbsp;&centerdot;&nbsp;2.\
-(See also OEIS:[A350555](https://oeis.org/A350555), [A350556](https://oeis.org/A350556) 
+However, it takes 774 iterations to get the initial digit as 2^3 in the trajectory of 89,
+and I was not patient enough to find the second digit as 2^1 in the trajectory of $89\cdot2$.\
+(See also [oeis:A350555](https://oeis.org/A350555), [A350556](https://oeis.org/A350556) 
 and hopefully soon [A395539](https://oeis.org/A395539).)
 
 References:
