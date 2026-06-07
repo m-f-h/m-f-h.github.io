@@ -16,26 +16,27 @@ import json
 
 app = Flask(__name__)
 app.secret_key = "my_PA_webapp_random_secret" # for signing the session(cookies?)
-cache = {} # this will be "persistent", possibly cross-user
+cache = {} # this will be "persistent", possibly cross-session, cross-user
 # Flask.session will be a dict specific to the user/visitor's session
-#
+
 @app.route("/") # this decorator tells Flask that visiting this (URL)"PATH" should call the home() function
 def home(): return render_template("home.html")
 
 @app.route("/logout")
 def logout(): session.pop("username", None); return redirect("/")
 
-@app.route("/user") # it's possible to specify args to the function that must be part of the path
-def user():
+@app.route("/user") # it's possible to use ".../<name:type>" to include parameters
+def user():         # that will be passed to the function, in the path/route.
     if request.method == "POST":
         vars().update((v,request.form.get(v))for v in('username','password'))
         if username and password:
             if check_credentials(username, password): # for_url() yields the route for a given function
                 session["username"] = username ; return redirect(url_for('user'))
-            return render_template(user.html, error_msg="Wrong username or password.")
+            return render_template(user.html, error="Wrong username or password.")
 
-# The following function has no URL path to it. If a function expects arguments,
-# they must be part of the 'route', e.g.: @app.route("/user/<string:username>/<int:password>")
+# The following function has no route to it. If there is a route to a function that expects arguments,
+# the parameters must be part of the 'route', e.g.: @app.route("/user/<string:username>")
+
 def check_credentials(username, password):
     users = load_users() # try: json.load(f := open(USERFILE)), except FileNotFoundError: ...)
     if username in users: return check_password_hash(users[username], password)
@@ -49,9 +50,11 @@ def set_password(username, password):
     except Exception as E: return f"Error when writing file: {E}"
 ```
 The functions perform calculations, they can access HTTP info using Flask.request as shown above, 
-but they should use the templates for rendering the pages. For example, you may have the following **./templates/base.html**:
+but they should use the templates for rendering the pages. They can pass variables to the template,
+given as additional keyword args in the call to 
+For example, you may have the following **./templates/base.html**:
 ```
-<!DOCTYPE html>
+<!DOCTYPE html>{% raw %}
 <html><head><title>{% block title %}MFH's Web Apps on PythonAnywhere{% endblock %}</title></head>
 <body>
     <nav>
@@ -62,13 +65,13 @@ but they should use the templates for rendering the pages. For example, you may 
     </span>
     </nav>
     <div id="content">
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock %}{% endraw %}
     </div>
 </body></html>
 ```
 And this might be **~/website/templates/user.html**:
 ```
-{% extends "base.html" %}
+{% raw %}{% extends "base.html" %}
 {% block title %}User account and settings{% endblock %}
 {% block content %}
 {% if username %}
@@ -84,13 +87,13 @@ And this might be **~/website/templates/user.html**:
     <label>Password: <input name="password" type="password"></label>
     <button type="submit">Login</button>
   </form>
-{% endif %}
+{% endif %}{% endraw %}
 ```
-In `{% ... %}` you can use several control structures like `for x in cache.things`
+In `\{% ... %}` you can use several control structures like `for x in cache.things`
 (with `dict.key` being a Jinja shortcut for `dict['key']`), `if-else-endif` as seen earlier, etc.
-and in `{{ ... }}` you can use most valid Python expressions plus other stuff, *e.g.*,
+and in `\{{ ... }}` you can use most valid Python expressions plus other stuff, *e.g.*,
 filters appended to expressions with `expr|filter`.
 
 There are quite a few more things to say, but I'll stop here for now.
 
-Check out; *e.g.*, [this website for docs on Jinja templates and other stuff](https://tedboy.github.io/jinja2/templ13.html).
+Check out, *e.g.*, [this website for docs on Jinja templates and other stuff](https://tedboy.github.io/jinja2/templ13.html).
