@@ -1,7 +1,7 @@
 ## Webapps with Flask
 Today I started creating a web app on PythonAnywhere.com (= PA in the sequel).
 
-With the free account you can create one web app, which will be located at <username>.pythonanywhere.com.
+With the free account you can create one web app, which will be located at `<username>.pythonanywhere.com`.
 
 You can choose different frameworks, the tutorial suggested to start with Flask.
 
@@ -87,7 +87,7 @@ And this might be **~/website/templates/user.html**:
 {% endif %}
 ```
 In `{% ... %}` you can use several control structures like `for x in cache.things`
-(with dict.key being a Jinja shortcut for dict['key'],), `if-else-endif` as seen earlier, etc.
+(with `dict.key` being a Jinja shortcut for `dict['key']`), `if-else-endif` as seen earlier, etc.
 and in `{{ ... }}` you can use most valid Python expressions plus other stuff, *e.g.*,
 filters appended to expressions with `expr|filter`.
 
