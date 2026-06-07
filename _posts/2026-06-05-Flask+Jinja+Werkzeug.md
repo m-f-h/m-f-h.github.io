@@ -52,9 +52,9 @@ def set_password(username, password):
 The functions perform calculations, they can access HTTP info using Flask.request as shown above, 
 but they should use the templates for rendering the pages. They can pass variables to the template,
 given as additional keyword args in the call to 
-For example, you may have the following **./templates/base.html**:
+For example, you may have the following **./templates/base.html**:{% raw %}
 ```
-<!DOCTYPE html>{% raw %}
+<!DOCTYPE html>
 <html><head><title>{% block title %}MFH's Web Apps on PythonAnywhere{% endblock %}</title></head>
 <body>
     <nav>
@@ -65,13 +65,13 @@ For example, you may have the following **./templates/base.html**:
     </span>
     </nav>
     <div id="content">
-        {% block content %}{% endblock %}{% endraw %}
+        {% block content %}{% endblock %}
     </div>
 </body></html>
 ```
 And this might be **~/website/templates/user.html**:
 ```
-{% raw %}{% extends "base.html" %}
+{% extends "base.html" %}
 {% block title %}User account and settings{% endblock %}
 {% block content %}
 {% if username %}
@@ -87,12 +87,13 @@ And this might be **~/website/templates/user.html**:
     <label>Password: <input name="password" type="password"></label>
     <button type="submit">Login</button>
   </form>
-{% endif %}{% endraw %}
+{% endif %}
 ```
-In `\{% ... %}` you can use several control structures like `for x in cache.things`
+In `{% ... %}` you can use several control structures like `for x in cache.things`
 (with `dict.key` being a Jinja shortcut for `dict['key']`), `if-else-endif` as seen earlier, etc.
-and in `\{{ ... }}` you can use most valid Python expressions plus other stuff, *e.g.*,
+and in `{{ ... }}` you can use most valid Python expressions plus other stuff, *e.g.*,
 filters appended to expressions with `expr|filter`.
+{% endraw %}
 
 There are quite a few more things to say, but I'll stop here for now.
 
