@@ -1,6 +1,4 @@
-title: WSL & linux on Win11
----
-## WSL & linux on Win11
+## WSL, linux and gp2c on Win11
 
 Yesterday I wanted to compile a PARI/GP program to C. However, gp2c is only available as source.
 
