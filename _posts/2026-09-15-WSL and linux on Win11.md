@@ -33,15 +33,15 @@ worked. IDK what that exactly does, I had to run all the other `install` command
 one per function, and a few `anon` functions in addition to what I defined in my code -- 
 probably some closures that were "inlined" in my code)
 
-### aftermath
+### aftermath: missing `-include pari/paripriv.h` and `Makefile`
 Weirdly enough, on the next day, I had to face several new obstacles that appeared out of nowhere.
 
 In one compilation run, the "init_..." was the only "install" line in `MyFile.c` -- maybe due to a compilation error occurring somewhere, that problem disappeared by itself.
 
 BUT, the main problem is that I faced an error that would not disappear:
-        MyFile.c:507:3: error: implicit declaration of function ‘andpari’; did you mean ‘addri’? [-Wimplicit-function-declaration]
-      507 |   andpari(stoi(/* ... */
-          |   ^~~~~~~
+            MyFile.c:507:3: error: implicit declaration of function ‘andpari’; did you mean ‘addri’? [-Wimplicit-function-declaration]
+          507 |   andpari(stoi(/* ... */
+              |   ^~~~~~~
 After many fruitless investigations, the final fix was to add `#include <pari/paripriv.h>` **after** `#include <pari/pari.h>` in `MyFile.c`, but since that would require manual editing after each compilation, I added `-include pari/paripriv.h` in the compiler flags -- but since then it's seen before the `#include <pari/pari.h>`, I also had to add `-include pari/pari.h` **before that** to the compiler flags.
 
 (Still not knowing which tool might use the `/*-*- compile-command: ...*/` in the header, I finally created a `Makefile` to remember these (and all other) compiler flags.
