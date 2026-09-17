@@ -39,6 +39,7 @@ Weirdly enough, on the next day, I had to face several new obstacles that appear
 In one compilation run, the "init_..." was the only "install" line in `MyFile.c` -- maybe due to a compilation error occurring somewhere, that problem disappeared by itself.
 
 BUT, the main problem is that I faced an error that would not disappear:
+
             MyFile.c:507:3: error: implicit declaration of function ‘andpari’; did you mean ‘addri’? [-Wimplicit-function-declaration]
           507 |   andpari(stoi(/* ... */
               |   ^~~~~~~
