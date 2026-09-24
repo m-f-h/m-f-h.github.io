@@ -4,9 +4,9 @@ I had experimented with githup pages a bit since some time ago,
 but today I decided to do it finally, instead (or, alas, after)
 starting yet another blog on blogger... I never go there and
 forget about the blogs I have started there (pepmath.blogspot.com
-and til-this.blogspot.com) and elsewhere (make the list ...)
+and til-this.blogspot.com) and elsewhere (TODO: make the list ...)
 
-I first created my m-f-h.github.io repo from scratch and put some content there,
+I first created [my m-f-h.github.io repo](https://github.com/m-f-h/m-f-h.github.io/) from scratch and put some content there,
 mainly to experiment with layout, responsive sidebars, etc.
 
 But then I figured it would be tiresome to re-install the jekyll stuff
@@ -35,12 +35,13 @@ defaults:
       values:
         tags: Other
 ```
-I think the  [/_config.yml](/_config.yml) file *could* define a default layout (TODO: check & link the docs), but doesn't, so far. (The only default it defines is the tag "Other" for "nodes" (what is the correct term? pages and posts...?) of type `post`)
+I think the  [/_config.yml](https://github.com/m-f-h/m-f-h.github.io/blob/main/_config.yml) file *could* define a default layout (TODO: check & link the docs), but doesn't, so far. (The only default it defines is the tag "Other" for "nodes" (what is the correct term? pages and posts...?) of type `post`)
 
 **Update:** had a look at Github Action Build Log and there was a warning, default for posts is no more `post` but now `posts`.
 
 #### page layout
-The page layouts are defined in [/_layouts](/_layouts), but for the moment, `post.html` is  the only entry there.
+The page layouts are defined in [/_layouts](https://github.com/m-f-h/m-f-h.github.io/blob/main/_layouts), 
+but for the moment, `post.html` is  the only entry there.
 
 These "layout" HTML files include some additional header stuff, but not the basic HTML header (`<head><title>...`) 
 
@@ -51,21 +52,24 @@ Then it has two `<div>` sections,
 `{\% include sharelinks.html %}` (these are the social media links defined in `/_config.yml` and shown in the footer, I think),
 * the other with `{\{ content }} {\% include navlinks.html %}` (the latter makes a navbar "[<- prev.post next post->]" below the contents.)
   
-* These two include files are specified in `/_includes`. 
+* These two include files are specified in [`/_includes`](https://github.com/m-f-h/m-f-h.github.io/blob/main/_includes). 
 * *There* is another file `head.html` which contains the HTML `<HEAD>` (with several `<LINK>` sections etc., but nothing else.)
 
 #### posts and pages
-* The posts are the `.md` files in `/_posts`
+* The posts are the `.md` files in [`/_posts`](https://github.com/m-f-h/m-f-h.github.io/blob/main/_posts).
+* To make a new post, just create a new file
+  "[_posts/20YY-MM-DD-title.md](https://github.com/m-f-h/m-f-h.github.io/new/main/_posts?filename=20YY-MM-DD-title.md)".
 * Where is that subdir specified?
 * Where else does Jekyll look for other pages?
   * Obviously it does look for `.md` pages at the root.
   * Can we put static pages in the `/_posts` subdir?
-  * Can we make arbitrary folders, and Jekyll will look everywhere? If we want to "hide" a file but not delete it, can/must we create a special folder and list it in `.gitignore`?
-
+  * Can we make arbitrary folders, and Jekyll will look everywhere?
+    If we want to "hide" a file but not delete it, can/must we create a special folder and list it in `.gitignore`?
 
   [Is that a feature of `jekyll-sitemap` listed in `/_config.yml` ?])
 * the static homepage (`/index.md`) has no YAML header at all. Does it also use the  `post.html` layout ?
-* the "Blog archive" page (`/archive.md`) does have a YAML header that has `layout: default`. Does that mean that it should : 
+* the "Blog archive" page [`/archive.md`](https://github.com/m-f-h/m-f-h.github.io/blob/main/archive.md)
+  does have a YAML header that has `layout: default`. Does that mean that it should : 
   * use a `default.html` layout which however is not defined?
   * use a default layout that should be defined in `/config.yml` but isn't ?
   * use as layout the only one that is defined (or if it weren't the only one, then the alphabetically first one?)
@@ -84,3 +88,6 @@ and a `<script async src=...>` to include some `mathjax.js` from some CloudFlare
 * I will have to create a second "layout" for static pages that are not part of the blog.
 * In order that both, these pages and the blog posts, keep a uniform appearance, I guess I'll put the common stuff in a new `_includes` file
 
+* Apparently, I can activate "pages" also in a different repo other than `m-f-h.github.io`.
+  I actually did this for my `/OEIS` repo, which gave rise to an **indepedent**(!?) web site
+  [https://m-f-h.github.io/OEIS](https://m-f-h.github.io/OEIS)! (There I don't have a blog, but I do have a wiki.)
