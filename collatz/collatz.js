@@ -11,6 +11,9 @@ function describeArc(cx, cy, r, startAngle, endAngle) {
     return [ "M", start.x, start.y, "A", r, r, 0, largeArcFlag, sweepFlag, end.x, end.y
     ].join(" ");
 }
+var step=0;
+const steps=["3<i>n</i>+1", "(3<i>n</i>+1)/2"];
+function toggleStep(t){ t.innerHTML=steps[step = t.innerText==="3n+1"]; }
 
 const setAttributes = (el, attrs) => Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
 const geValue = (id) => document.getElementById(id).value;
