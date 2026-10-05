@@ -12,10 +12,8 @@ function describeArc(cx, cy, r, startAngle, endAngle) {
     ].join(" ");
 }
 var step=0;
-const steps=["3<i>n</i>+1", "(3<i>n</i>+1)/2"];
-function toggleStep(t){ console.log("innerText =", t.innerText);
-                       t.innerHTML = steps[step = t.innerText==="3n+1"];
-                       console.log("step =",step," steps =",steps);  }
+const steps={false: "3<i>n</i>+1", true: "(3<i>n</i>+1)/2"};
+function toggleStep(t){ t.innerHTML = steps[step = t.innerText==="3n+1"] }
 
 const setAttributes = (el, attrs) => Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
 const geValue = (id) => document.getElementById(id).value;
