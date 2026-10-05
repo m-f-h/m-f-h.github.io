@@ -52,7 +52,7 @@ function drawGraph() {
         if (n_minus_1 % 3n === 0n) {
             let m = n_minus_1 / 3n;
             // Validate Collatz rules: must be odd (and we DON'T skip 1)
-            if (m & 1n) {
+            if (m & 1n &&  m > step ) {
                 let m_mod_3 = m % 3n, t = middle / 100.0;
                 // Place arc child. For multiples of 3, depending on "position" setting.
                 if (!m_mod_3 && position!="middle")
