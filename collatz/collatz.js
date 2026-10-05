@@ -24,6 +24,7 @@ function drawGraph() {
     const unit_len  = getInt('unit_len');
     const thickness = getInt('thickness');
     const font_size = getInt('font_size');
+    const base = getInt('base');
     const truncate  = getInt('truncate');
     const position  = geValue('position');
     const middle    = geValue('middle');
@@ -45,30 +46,29 @@ function drawGraph() {
         // Stop expanding this branch if we truncate at multiples of 3
         if (!n_mod_3 && truncate && (truncate==1 || !(current.n & 1n))) continue;
 
-        let n_minus_1 = (step ? current.n * 2n : current.n) - 1n;
         let new_cw_bound = current.cw_bound;
 
         // Check for valid 3n+1 reverse child
-        if (n_minus_1 % 3n === 0n) {
-            let m = n_minus_1 / 3n;
-            // Validate Collatz rules: must be odd (and we DON'T skip 1)
-            if (m & 1n &&  m > step ) {
+        const n_minus_1 = (step ? current.n * 2n : current.n) - 1n;
+        if (n_minus_1 % 3n == 0) {
+            const m = n_minus_1 / 3n;
+            // must be odd to have parent; skip 1 iff step = true.
+            if (m & 1n && m > step) {
                 let m_mod_3 = m % 3n, t = middle / 100.0;
                 // Place arc child. For multiples of 3, depending on "position" setting.
                 if (!m_mod_3 && position!="middle")
                         if (position=="end") t = 0.85; // TODO: better formula to avoid getting too close
                         else if (truncate) t = 0.15; // only if truncated. TODO: as above
-                let child3_angle = current.angle + (current.cw_bound - current.angle)*t;
-                let child3 = { n: m, dist: current.dist, angle: child3_angle, cw_bound: current.cw_bound };
+                const child3_angle = current.angle + (current.cw_bound - current.angle)*t;
+                const child3 = { n: m, dist: current.dist, angle: child3_angle, cw_bound: current.cw_bound };
                 edges.push({ type: 'arc', source: child3, target: current, dist: current.dist });
                 queue.push(child3);
                 // Update boundary for the radial ray
                 // if not multiple of 3, or not truncated, and not for m=1
                 if ((m_mod_3 || !truncate) && m > 1n) new_cw_bound = child3_angle; 
             }
-            else if (!m) continue; // That was n = 1: don't generate *2 child!
+            else if (m <= step) continue; // That was n = 1: don't generate *2 child!
         }
-
         // Generate radial *2 child
         if (current.dist < max_gen) {
             let child2 = { n: current.n * 2n, dist: current.dist + 1, angle: current.angle, 
@@ -158,7 +158,7 @@ function drawGraph() {
         let text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         // Adjust slight optical y alignment for central baseline
         setAttributes(text, {x: p.x, y: p.y + font_size * 0.05, class: 'node-text', 'font-size': font_size});
-        text.textContent = node.n.toString();
+        text.textContent = node.n.toString(base);
         g.appendChild(text);
         nodeGroup.appendChild(g);
     });
