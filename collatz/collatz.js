@@ -45,7 +45,7 @@ function drawGraph() {
         // Stop expanding this branch if we truncate at multiples of 3
         if (!n_mod_3 && truncate && (truncate==1 || !(current.n & 1n))) continue;
 
-        let n_minus_1 = (step ? 2 : 1)*current.n - 1n;
+        let n_minus_1 = (step ? current.n * 2n : current.n) - 1n;
         let new_cw_bound = current.cw_bound;
 
         // Check for valid 3n+1 reverse child
